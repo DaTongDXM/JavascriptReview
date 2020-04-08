@@ -6,6 +6,11 @@
     <script src="https://cdn.staticfile.org/jquery/1.10.2/jquery.min.js"></script>
     <title>Document</title>
     <style>
+        body{
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: space-around;
+        }
         section{
             height: 100px;
             width: 300px;
@@ -13,9 +18,10 @@
             padding: 10px;
             border:1px solid brown;
             text-align: center;
-            
         }
-        
+        section:hover{
+            box-shadow:0 0 18px rgba(0,0,0,0.4);
+        }
     </style>
 </head>
 <body>
@@ -36,6 +42,22 @@
     </section>
     <section name="section7"></section>
     <section id="section8" name="section8"></section>
+    <section>
+        <select id="selector">
+            <option value="option1">option1</option>
+            <option value="option2">option2</option>
+            <option value="option3">option3</option>
+            <option value="option4">option4</option>
+        </select>
+        <p></p>
+    </section>
+    <section></section>
+    <section></section>
+    <section></section>
+    <section></section>
+    <section></section>
+    <section></section>
+    <section></section>
     <script>
         $(function(){
            var section1=$("#section1")
@@ -43,7 +65,7 @@
             section1.text("Section1")
 
             var section2=$(".section2")
-            section2.css({'background-color':'blue','box-shadow':'4px 4px 10px #f00'})
+            section2.css({'background-color':'blue'})
             section2.text("Section2")
 
             var section3=$("section")[2]
@@ -80,6 +102,12 @@
             section8.css("background-color","steelblue")
             section8.text("section8")
 
+            var section9=$("#selector").find("option:selected").text()
+            var section9p=$("#selector").parent().find('p').text(section9)
+            $("#selector").change(()=>{
+                section9=$("#selector").find("option:selected").text()
+                $("#selector").parent().find('p').text(section9)
+            })
 
         })
     </script>

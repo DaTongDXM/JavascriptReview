@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="https://cdn.staticfile.org/jquery/1.10.2/jquery.min.js"></script>
+    <title>Document</title>
+    <style>
+        section{
+            height: 100px;
+            width: 300px;
+            margin: 10px auto;
+            padding: 10px;
+            border:1px solid brown;
+            text-align: center;
+            
+        }
+        
+    </style>
+</head>
+<body>
+    <section id="section1"></section>
+    <section class="section2"></section>
+    <section></section>
+    <section id="section4">
+        <article>
+        </article>
+    </section>
+    <section></section>
+    <section>
+        <ul>
+            <li>item1</li>
+            <li>item2</li>
+            <li>item3</li>
+        </ul>
+    </section>
+    <section name="section7"></section>
+    <section id="section8" name="section8"></section>
+    <script>
+        $(function(){
+           var section1=$("#section1")
+            section1.css('background-color','red')
+            section1.text("Section1")
+
+            var section2=$(".section2")
+            section2.css({'background-color':'blue','box-shadow':'4px 4px 10px #f00'})
+            section2.text("Section2")
+
+            var section3=$("section")[2]
+            section3.style.backgroundColor = 'yellow';
+            section3.innerText="Section3"
+            //这里关于标签选择器要特意说明一下，通过标签选择器选择出来的往往是一个数组，需要通过索引来获取对应的Dom对象，这里需要将Dom对象装换为jQuery对象才能使用jQuery的方法
+            //var jQuerySection3=$(section3)
+
+
+
+            //匹配所有id为section4里面的article
+            var article4=$("#section4>article")
+            article4.css({"background-color":"pink","width":"100%","height":"100%"})
+            article4.text("Article4")
+            //匹配所有id为section4后面紧跟着的section
+            var section5=$("#section4+section")
+            section5.css("background-color","green")
+            section5.text("Section5")
+            //匹配所有第一个元素和最后一个元素
+            var li1=$("li:first")
+            var li2=$("li:eq(1)")
+            var lil=$("li:last")
+            li1.css({"background-color":"deeppink"})
+            li2.css("background-color","darkgoldenrod")
+            lil.css("background-color","firebrick")
+            //匹配属性名为name
+            var section7 =$("section[name]")
+            section7.css("background-color","sandybrown")
+            //匹配属性名特定值的
+            var section70 =$("section[name='section7']")
+            section70.text("section7")
+
+            var section8=$("section[id][name='section8']")
+            section8.css("background-color","steelblue")
+            section8.text("section8")
+
+
+        })
+    </script>
+</body>
+</html>

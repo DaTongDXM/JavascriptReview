@@ -1,0 +1,146 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="https://cdn.staticfile.org/jquery/1.10.2/jquery.min.js"></script>
+</head>
+<body>
+    <div id="ev">
+        <style>
+            #ev{
+                width: 300px;
+                
+                background-color: red;
+                text-align: center;
+                line-height: 100px;
+            }
+        </style>
+        <img src="" alt="" onerror="error()"/>
+        <ul id="ul">
+            <li>item1</li>
+            <li>item2</li>
+            <li>item3</li>
+        </ul>
+    </div>
+    <div id=jq>
+        <style>
+            #jq{
+                margin-top: 10px;
+                width: 300px;
+                background-color: blueviolet;
+                text-align: center;
+                line-height: 100px;
+            }
+        </style>
+        <ul id="jqul">
+            <li>item4</li>
+            <li>item5</li>
+            <li>item6</li>
+        </ul>
+    </div>
+    <script>
+
+        setTimeout(()=>{
+            var ul=document.getElementById('ul')
+            var li3=document.createElement('li')
+            li3.innerHTML='item4'
+            ul.appendChild(li3)
+        },1000)
+
+        window.onload=function(){
+/**
+        事件委托
+        */
+        var ul=document.getElementById('ul');
+        ul.addEventListener('mouseover',()=>{
+           event.target.style.backgroundColor='red'
+           event.stopPropagation()
+        },false)
+        ul.addEventListener('mouseout',()=>{
+           event.target.style.backgroundColor='yellow'
+           event.stopPropagation()
+        },false)
+        
+
+        //postMessage
+        window.addEventListener('message',(e)=>{
+            console.log("postMessage")
+            if(e.origin==="www.baidu.com"){
+                console.log("postMessage接收:"+e.data)
+                e.source.postMessage('我收到了',"www.qq.com")
+            }
+        })
+
+        var ev=document.getElementById("ev")
+        window.addEventListener('click',()=>{
+            console.log('winwod');
+        },true)
+        document.addEventListener('click',()=>{
+            console.log('document')
+        },true)
+        document.documentElement.addEventListener('click',()=>{
+            console.log('html');
+            
+        },true)
+        document.body.addEventListener('click',()=>{
+            console.log('body');
+        },true)
+        ev.addEventListener('click',()=>{
+            console.log('ev');
+        },true)
+
+        window.addEventListener('click',()=>{
+            console.log('winwod pop');
+        },false)
+        document.addEventListener('click',()=>{
+            console.log('document pop')
+        },false)
+        document.documentElement.addEventListener('click',()=>{
+            console.log('html pop');
+            
+        },false)
+        document.body.addEventListener('click',()=>{
+            console.log('body pop');
+        },false)
+        
+
+        var eve=new Event('custom',{color:'blue'})
+        ev.addEventListener('custom',()=>{
+            
+            this.ev.style.backgroundColor=event.color
+        })
+        
+        
+
+        ev.addEventListener('click',()=>{
+            console.log('ev pop');
+            ev.dispatchEvent(eve)   
+        },false)
+
+
+        //资源加载错误捕获
+        window.addEventListener('error',function(event){
+            console.log('window监听'+event.target)
+        },true)
+
+        
+        }
+        
+        $(function () {
+            $("#jqul").on("click","li",function () {
+                event.target.style.backgroundColor="yellow"
+                return false
+            })
+            $("#jqul").on("mouseout","li",function () {
+                event.target.style.backgroundColor="blue"
+            })
+            
+        });
+        function error(){
+            console.log('onerror')
+        }
+    </script>
+</body>
+</html>

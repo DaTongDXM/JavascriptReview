@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        html *{
+            margin: 0;
+            padding: 0;
+
+            
+        }
+         body{
+            
+            height: 100%;
+        }
+        #btn{
+            display: block;
+        }
+    </style>
+    
+</head>
+<body>
+    <button id="btn" onclick="btnClick()">postmessage</button>
+    <iframe name="ifream" src="event.html" >
+        <style>
+            #ifream{
+                width: 100%;
+                height: 100%;
+            }
+        </style>
+    </iframe>
+    <script>
+        
+            window.addEventListener("message",(e)=>{
+                if(e.origin==="www.qq.com"){
+                    console.log(e.data)
+                }
+            })
+            
+            function btnClick(){
+                var ifm=window.frames["ifream"]
+                
+               ifm.postMessage("hello ifream","www.baidu.com")
+            }
+            
+        
+    </script>
+</body>
+</html>

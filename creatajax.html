@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="referrer" content="origin">
+    <meta http-equiv="Access-Control-Allow-Origin" content="*">
+    <title>Document</title>
+    <script>
+        window.onload=function(){
+        //1.创建一个XMLHttpRequest对象，
+        var xhr=null
+        window.XMLHttpRequest?xhr=new XMLHttpRequest():xhr=new ActiveXObject('Microsoft.XMLHTTP')
+        //2：准备发送请求-配置发送请求的一些行为
+        //open即打开链接，第一个参数是以什么方式；第二个是往哪儿发送请求，第三个可以不写，默认true,表示异步，false表示同步；；
+        xhr.open('get','http://192.168.1.7:8088/',true)
+        xhr.withCredentials = true;
+        //3：执行发送的动作
+        xhr.send(null);
+        //第四步：指定一些回调函数，也属于事件函数；不触发不执行，触发条件是xhr.readyState;z这个值有0-4，共5个状态，是由浏览器控制的；
+        xhr.onreadystatechange = function(){
+            if(xhr.readyState===4){
+                var data = xhr.responseText;
+                console.log(data)
+            }
+        }
+        }
+        
+
+    </script>
+</head>
+<body>
+    
+</body>
+</html>

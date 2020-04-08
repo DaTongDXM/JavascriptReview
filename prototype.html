@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script>
+        var o1={name:'o1'}
+        console.log(o1)
+        var o2=new Object({name:'o2'})
+        console.log(o2)
+        var M=function(){
+            this.name='o3'
+            var say=function(){}
+            this.see=function(){}
+        }
+        var o3=new M()
+        console.log(o3)
+        var o4=Object.create({name:'o4'})
+        console.log(o4)
+
+        // instanceof 的原理是判断对象的__proto__===Object.prototype    
+    </script>
+</head>
+<body>
+    
+</body>
+</html>
